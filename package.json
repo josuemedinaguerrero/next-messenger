@@ -26,6 +26,7 @@
     "typescript": "5.2.2"
   },
   "devDependencies": {
-    "@types/react": "18.2.22"
+    "@types/react": "18.2.22",
+    "prisma": "^5.3.1"
   }
 }
