@@ -3,6 +3,7 @@
 import AuthSocialButton from "@/app/components/AuthSocialButton";
 import Button from "@/app/components/Button";
 import Input from "@/app/components/inputs/Input";
+import axios from "axios";
 
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -28,7 +29,7 @@ const AuthForm = () => {
     setIsLoading(true);
 
     if (variant === "REGISTER") {
-      // Axios Register
+      axios.post("/api/register", data);
     }
 
     if (variant === "LOGIN") {
@@ -49,7 +50,7 @@ const AuthForm = () => {
           {variant === "REGISTER" && <Input label="Name" id="name" register={register} errors={errors} disabled={isLoading} />}
 
           <Input label="Email" id="email" register={register} errors={errors} disabled={isLoading} />
-          <Input label="Password" id="password" register={register} errors={errors} disabled={isLoading} />
+          <Input label="Password" id="password" type="password" register={register} errors={errors} disabled={isLoading} />
           <div>
             <Button disabled={isLoading} type="submit" fullWidth>
               {variant === "LOGIN" ? "Sign in" : "Register"}
