@@ -3,11 +3,14 @@
 import AuthSocialButton from "@/app/components/AuthSocialButton";
 import Button from "@/app/components/Button";
 import Input from "@/app/components/inputs/Input";
+
+import toast from "react-hot-toast";
 import axios from "axios";
 
 import { useCallback, useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { BsGithub, BsGoogle } from "react-icons/bs";
+import { signIn } from "next-auth/react";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -29,16 +32,33 @@ const AuthForm = () => {
     setIsLoading(true);
 
     if (variant === "REGISTER") {
-      axios.post("/api/register", data);
+      axios
+        .post("/api/register", data)
+        .catch(() => toast.error("Something went wrong!"))
+        .finally(() => setIsLoading(false));
     }
 
     if (variant === "LOGIN") {
-      // NextAuth SignIn
+      signIn("credentials", { ...data, redirect: false })
+        .then((res) => {
+          if (res?.error) toast.error(res.error || "Invalid Credentials!");
+          if (res?.ok && !res.error) toast.success("Logged in!");
+        })
+        .finally(() => setIsLoading(false));
     }
   };
 
   const socialAction = (action: string) => {
     setIsLoading(true);
+
+    signIn(action, { redirect: false })
+      .then((res) => {
+        console.log({ res });
+
+        if (res?.error) toast.error(res.error || "Invalid Credentials!");
+        if (res?.ok && !res.error) toast.success("Logged in!");
+      })
+      .finally(() => setIsLoading(false));
 
     // NextAuth Social Sign In
   };
