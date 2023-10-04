@@ -41,7 +41,9 @@ export async function POST(request: Request, { params }: { params: IParams }) {
       include: { sender: true, seen: true },
       data: {
         seen: {
-          connect: { id: currentUser.id },
+          connect: {
+            id: currentUser.id,
+          },
         },
       },
     });
