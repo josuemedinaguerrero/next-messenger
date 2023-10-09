@@ -6,8 +6,7 @@ import { NextResponse } from "next/server";
 export async function POST(request: Request) {
   try {
     const currentUser = await getCurrentUser();
-    const body = await request.json();
-    const { message, image, conversationId } = body;
+    const { message, image, conversationId } = await request.json();
 
     if (!currentUser?.id || !currentUser?.email) {
       return new NextResponse("Unauthorized", { status: 401 });

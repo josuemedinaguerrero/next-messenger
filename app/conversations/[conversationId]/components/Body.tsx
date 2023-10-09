@@ -23,7 +23,7 @@ const Body: React.FC<BodyProps> = ({ initialMessages }) => {
 
   return (
     <div className="flex-1 overflow-y-auto">
-      {messages.map((message, i) => (
+      {messages?.map((message, i) => (
         <MessageBox key={message.id} data={message} isLast={i === messages.length - 1} />
       ))}
       <div ref={bottomRef} className="pt-24" />

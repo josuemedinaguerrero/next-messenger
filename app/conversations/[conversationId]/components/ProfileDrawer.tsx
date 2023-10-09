@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { Fragment, useMemo, useState } from "react";
 import { IoClose, IoTrash } from "react-icons/io5";
 import ConfirmModal from "./ConfirmModal";
+import AvatarGroup from "@/app/components/AvatarGroup";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -71,9 +72,7 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({ data, isOpen, onClose }) 
                       </div>
                       <div className="relative mt-6 flex-1 px-4 sm:px-6">
                         <div className="flex flex-col items-center">
-                          <div className="mb-2">
-                            <Avatar user={otherUser} />
-                          </div>
+                          <div className="mb-2">{data.isGroup ? <AvatarGroup users={data.users} /> : <Avatar user={otherUser} />}</div>
                           <div>{title}</div>
                           <div className="text-sm text-gray-500">{statusText}</div>
                           <div className="flex gap-10 my-8">

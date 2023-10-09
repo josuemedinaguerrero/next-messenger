@@ -1,10 +1,12 @@
+import Avatar from "@/app/components/Avatar";
+
 import { FullMessageType } from "@/app/types";
+
+import { format } from "date-fns";
 import { useSession } from "next-auth/react";
 
-import clsx from "clsx";
-import Avatar from "@/app/components/Avatar";
-import { format } from "date-fns";
 import Image from "next/image";
+import clsx from "clsx";
 
 interface MessageBoxProps {
   data: FullMessageType;
