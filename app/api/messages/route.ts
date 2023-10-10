@@ -37,13 +37,17 @@ export async function POST(request: Request) {
       data: {
         lastMessageAt: new Date(),
         messages: {
-          connect: { id: newMessage.id },
+          connect: {
+            id: newMessage.id,
+          },
         },
       },
       include: {
         users: true,
         messages: {
-          include: { seen: true },
+          include: {
+            seen: true,
+          },
         },
       },
     });
